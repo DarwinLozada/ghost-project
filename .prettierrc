@@ -1,0 +1,16 @@
+{
+    "singleQuote": true,
+    "trailingComma": "all",
+    "tabWidth": 2,
+    "printWidth": 120,
+    "arrowParens": "always",
+    "overrides": [
+      {
+        "files": "*.ts",
+        "options": {
+          "parser": "typescript"
+        }
+      }
+    ]
+  }
+  
