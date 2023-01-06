@@ -43,8 +43,18 @@
       "rules": {
         "no-tabs": "off"
       }
+    },
+    {
+      "files": ["*.ts"],
+      "parser": "@typescript-eslint/parser",
+      "plugins": [
+        "@typescript-eslint"
+      ],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended"
+      ]
     }
-    // ...
   ],
   "rules": {
     "no-tabs": "off"

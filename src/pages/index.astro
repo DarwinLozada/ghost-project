@@ -6,8 +6,8 @@ import prequelle from '../assets/images/albums/prequelle.webp'
 import meliora from '../assets/images/albums/meliora.webp'
 import infestissumam from '../assets/images/albums/infestissumam.webp'
 import impera from '../assets/images/albums/impera.webp'
+import Album from '../components/Album/index.astro'
 import { Image } from '@astrojs/image/components'
-
 ---
 
 <Layout title="Welcome to Astro.">
@@ -15,25 +15,40 @@ import { Image } from '@astrojs/image/components'
 		<div class="relative w-[50%]">
 			<Image class="blur-[1px] max-w-none w-full" src={pentagramImage} alt="pentagram image" />
 
-			<div class="absolute w-[22%] -top-[10%] left-[50%] -translate-x-[50%]">
-				<Image class="max-w-none w-full shadow-album" src={opusEponymous} alt="opus_eponymous album cover image" />
-			</div>
+			<Album
+				albumId="opus_eponymous"
+				className="absolute w-[22%] -top-[10%] left-[50%] -translate-x-[50%]"
+				imageSrc={opusEponymous}
+				imageAlt="opus_eponymous album cover image"
+			/>
 
-			<div class="absolute w-[22%] top-[28%] -right-[8%]">
-				<Image class="max-w-none w-full shadow-album" src={infestissumam} alt="infestissumam album cover image" />
-			</div>
+			<Album
+				albumId="infestissumam"
+				className="absolute w-[22%] top-[28%] -right-[8%]"
+				imageSrc={infestissumam}
+				imageAlt="infestissumam album cover image"
+			/>
 
-			<div class="absolute w-[22%] top-[78%] right-[8%]">
-				<Image class="max-w-none w-full shadow-album" src={meliora} alt="meliora album cover image" />
-			</div>
+			<Album
+				albumId="meliora"
+				className="absolute w-[22%] top-[78%] right-[8%]"
+				imageSrc={meliora}
+				imageAlt="meliora album cover image"
+			/>
 
-			<div class="absolute w-[22%] top-[78%] left-[6%]">
-				<Image class="max-w-none w-full shadow-album" src={prequelle} alt="prequelle album cover image" />
-			</div>
+			<Album
+				albumId="prequelle"
+				className="absolute w-[22%] top-[78%] left-[6%]"
+				imageSrc={prequelle}
+				imageAlt="prequelle album cover image"
+			/>
 
-			<div class="absolute w-[22%] top-[28%] -left-[8%]">
-				<Image class="max-w-none w-full shadow-album" src={impera} alt="impera album cover image" />
-			</div>
+			<Album
+				albumId="impera"
+				className="absolute w-[22%] top-[28%] -left-[8%]"
+				imageSrc={impera}
+				imageAlt="impera album cover image"
+			/>
 		</div>
 	</div>
 	<h1 class="font-cinzel text-3xl font-normal">Prequelle</h1>

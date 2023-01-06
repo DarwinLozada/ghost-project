@@ -1,0 +1,30 @@
+---
+import { Image } from '@astrojs/image/components'
+
+// eslint-disable-next-line no-unused-vars
+interface Props {
+    albumId: string
+    imageSrc: string
+    imageAlt: string
+    className: string
+}
+
+const { className, imageAlt, imageSrc, albumId } = Astro.props
+
+---
+
+<div id={albumId} class={`album-cover-item ${className}`}>
+  <Image id={albumId} class="max-w-none w-full shadow-album" src={imageSrc} alt={imageAlt} />
+</div>
+
+<script>
+import { selectedAlbum, allAlbums } from '../../stores/albums'
+const albumCovers = document.querySelectorAll('.album-cover-item')
+allAlbums.set(Array.from(albumCovers))
+
+albumCovers.forEach((album) => {
+  album.addEventListener('click', () => {
+    selectedAlbum.set(album)
+  })
+})
+</script>
