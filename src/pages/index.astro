@@ -12,8 +12,8 @@ import { Image } from '@astrojs/image/components'
 
 <Layout title="Welcome to Astro.">
 	<div class="pt-96 w-screen flex justify-center items-center">
-		<div class="relative w-[50%]">
-			<Image class="blur-[1px] max-w-none w-full" src={pentagramImage} alt="pentagram image" />
+		<div id="pentagram-container" class="relative w-[50%]">
+			<Image id="pentagram-image" class="blur-[1px] max-w-none w-full" src={pentagramImage} alt="pentagram image" />
 
 			<Album
 				albumId="opus_eponymous"
