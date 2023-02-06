@@ -8,7 +8,7 @@ const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html class="flex" lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -17,14 +17,15 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body class="overflow-x-hidden">
-		<main class="min-h-screen min-w-full">
+		<main class="relative min-h-screen min-w-full ">
+			<div class="radial-grad h-[200vh] top-0 w-screen absolute" />
 			<slot />
 		</main>
 	</body>
 </html>
 <style is:global>
 
-	main {
+	.radial-grad {
 		background: radial-gradient(50% 50% at 50% 50%, #787878 0%, #1F1E1E 100%);;
 	}
 

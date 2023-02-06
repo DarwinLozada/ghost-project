@@ -13,9 +13,9 @@ const { className, imageAlt, imageSrc, albumId } = Astro.props
 
 ---
 
-<div id={albumId} class={`album-cover-item ${className}`}>
+<button id={albumId} class={`album-cover-item ${className}`}>
   <Image id={albumId} class="max-w-none w-full shadow-album" src={imageSrc} alt={imageAlt} />
-</div>
+</button>
 
 <script>
 import { selectedAlbum, allAlbums } from '../../stores/albums'

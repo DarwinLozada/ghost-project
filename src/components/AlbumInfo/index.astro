@@ -1,0 +1,29 @@
+---
+import type { Album } from '../../constants'
+
+// eslint-disable-next-line no-unused-vars
+type Props = Album
+
+const { name, id, songs } = Astro.props
+---
+
+<li class="album-item hidden opacity-0 text-white font-cinzel" id={id}>
+    <h2 id="album_title" class="font-cinzel text-6xl font-normal">
+        {name}
+    </h2>
+    <ul class="album_songs_container flex flex-col gap-3 min-w-[600px]">
+        {songs.map(({ name, duration }, index) => {
+          return (
+            <li class={`album_song flex items-center justify-between ${index === 0 ? 'mt-10' : ''}`}>
+                <span class="album_song__name">{name}</span>
+                <span class="album_song__duration">{duration}</span>
+            </li>
+          )
+        })}
+    </ul>
+</li>
+<style>
+    .selected {
+        display: block;
+    }
+</style>

@@ -7,13 +7,28 @@ import meliora from '../assets/images/albums/meliora.webp'
 import infestissumam from '../assets/images/albums/infestissumam.webp'
 import impera from '../assets/images/albums/impera.webp'
 import Album from '../components/Album/index.astro'
+import AlbumInfo from '../components/AlbumInfo/index.astro'
 import { Image } from '@astrojs/image/components'
+import { GHOST_ALBUMS } from '../constants'
 ---
 
 <Layout title="Welcome to Astro.">
-	<div class="pt-96 w-screen flex justify-center items-center">
-		<div id="pentagram-container" class="relative w-[50%]">
-			<Image id="pentagram-image" class="blur-[1px] max-w-none w-full" src={pentagramImage} alt="pentagram image" />
+	<div class="background-blob absolute blur-[140px] -top-24 -left-44 w-[65%] h-[80%] opacity-70 rounded-full" />
+	<div class="background-blob absolute blur-[140px] top-16 right-10 w-[50%] h-[75%] rounded-full" />
+	<div class="background-blob absolute blur-[140px] -bottom-[30%] left-[30%] w-[460px] h-[80%] rounded-full" />
+	<div class="background-blob absolute blur-[140px] -bottom-36 right-[0%] w-[460px] h-[80%] rounded-full" />
+	<div class="background-blob absolute blur-[140px] -bottom-36 left-[0%] w-[460px] h-[80%] rounded-full" />
+
+	<div class="relative backdrop-blur-md min-h-screen w-screen flex flex-row-reverse justify-center items-center">
+		<div id="albums_info_container" class="absolute min-h-screen w-0 pt-40 flex justify-start items-start">
+			<ul class="albums">
+				{GHOST_ALBUMS.map(({ id, name, songs }) => (
+					<AlbumInfo id={id} name={name} songs={songs} />
+				))}
+			</ul>
+		</div>
+		<div id="pentagram-container" class="z-10 flex items-center justify-center h-full relative w-[40%]">
+			<Image id="pentagram-image" class="blur-[2px] max-w-none w-full" src={pentagramImage} alt="pentagram image" />
 
 			<Album
 				albumId="opus_eponymous"
@@ -51,5 +66,5 @@ import { Image } from '@astrojs/image/components'
 			/>
 		</div>
 	</div>
-	<h1 class="font-cinzel text-3xl font-normal">Prequelle</h1>
+
 </Layout>
