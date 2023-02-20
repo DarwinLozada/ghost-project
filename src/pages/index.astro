@@ -11,7 +11,6 @@ import AlbumInfo from '../components/AlbumInfo/index.astro'
 import { Image } from '@astrojs/image/components'
 import { GHOST_ALBUMS } from '../constants'
 ---
-
 <Layout title="Welcome to Astro.">
 	<div class="background-blob absolute blur-[140px] -top-24 -left-44 w-[65%] h-[80%] opacity-70 rounded-full" />
 	<div class="background-blob absolute blur-[140px] top-16 right-10 w-[50%] h-[75%] rounded-full" />
@@ -66,5 +65,86 @@ import { GHOST_ALBUMS } from '../constants'
 			/>
 		</div>
 	</div>
+
+	<div id="youtube-player"></div>
+
+<script class="yt-script">
+const PLAYING_BTN_CLASS = 'playing'
+const PLAY_SONG_BTNS_CLASS = 'play-button'
+
+// 2. This code loads the IFrame Player API code asynchronously.
+const tag = document.createElement('script')
+
+tag.src = 'https://www.youtube.com/iframe_api?origin=http://localhost:3000'
+const firstScriptTag = document.querySelector('.yt-script')
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
+
+// 3. This function creates an <iframe> (and YouTube player)
+//    after the API code downloads.
+let player
+function onYouTubeIframeAPIReady () {
+	player = new YT.Player('youtube-player', {
+		height: '360',
+		width: '640',
+		videoId: 'IlZajb2Cpx8',
+		host: `${window.location.protocol}//www.youtube.com`,
+		events: {
+			onReady: onPlayerReady
+		},
+		playerVars: {
+			origin: window.location.origin
+		}
+	})
+}
+
+let currentPlayingBtn = null
+
+function onPlayerReady () {
+	const playBtns = document.querySelectorAll(`.${PLAY_SONG_BTNS_CLASS}`)
+	playBtns.forEach((btn) => {
+		btn.disabled = false
+	})
+}
+
+function stopVideo () {
+	currentPlayingBtn.classList.remove(PLAYING_BTN_CLASS)
+
+	const pauseIcon = currentPlayingBtn.querySelector('.pause_song')
+	const playIcon = currentPlayingBtn.querySelector('.play_song')
+
+	pauseIcon.classList.add('hidden')
+	playIcon.classList.remove('hidden')
+	player.stopVideo()
+}
+
+function playSong () {
+	currentPlayingBtn.classList.add('playing')
+
+	const pauseIcon = currentPlayingBtn.querySelector('.pause_song')
+	const playIcon = currentPlayingBtn.querySelector('.play_song')
+
+	pauseIcon.classList.remove('hidden')
+	playIcon.classList.add('hidden')
+
+	player.loadVideoById(currentPlayingBtn.dataset.videoId)
+}
+
+// Event listener for play song buttons.
+const playButtons = document.querySelectorAll('.play-button')
+
+playButtons.forEach((btn) => {
+	btn.addEventListener('click', function () {
+		if (currentPlayingBtn) {
+			stopVideo()
+		}
+
+		// Check if pressed btn is the same as the one being played now.
+		const isSameBtn = this.dataset.videoId === currentPlayingBtn?.dataset?.videoId
+		currentPlayingBtn = this
+
+		if (!isSameBtn) playSong()
+	})
+})
+</script>
 
 </Layout>

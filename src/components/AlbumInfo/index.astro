@@ -12,18 +12,36 @@ const { name, id, songs } = Astro.props
         {name}
     </h2>
     <ul class="album_songs_container flex flex-col gap-3 min-w-[600px]">
-        {songs.map(({ name, duration }, index) => {
-          return (
-            <li class={`album_song flex items-center justify-between ${index === 0 ? 'mt-10' : ''}`}>
-                <span class="album_song__name">{name}</span>
-                <span class="album_song__duration">{duration}</span>
-            </li>
-          )
+        {songs.map(({ name, duration, videoId }, index) => {
+            return (
+                <li data-video-id={videoId} class={`album_song flex gap-4 items-center justify-between ${index === 0 ? 'mt-10' : ''}`}>
+                    <div class="flex grow justify-between">
+                        <span class="album_song__name">{name}</span>
+                        <span class="album_song__duration">{duration}</span>
+                    </div>
+                    <button disabled data-video-id={videoId} class="play-button w-8 h-8 grid place-items-center rounded-full glass p-2 transition-opacity duration-1000 disabled:opacity-30">
+                        <svg class="play_song ml-1" width="11" height="14" viewBox="0 0 11 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.525 13.025C1.19167 13.2417 0.854333 13.2544 0.513 13.063C0.171666 12.8717 0.000666667 12.5757 0 12.175V1.82503C0 1.42503 0.171 1.12903 0.513 0.937029C0.855 0.745029 1.19233 0.757696 1.525 0.975029L9.675 6.15003C9.975 6.35003 10.125 6.63336 10.125 7.00003C10.125 7.3667 9.975 7.65003 9.675 7.85003L1.525 13.025Z" fill="black"/>
+                        </svg>
+                        <svg class="pause_song hidden" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 14V0H14V14H8ZM0 14V0H6V14H0Z" fill="black"/>
+                        </svg>
+                    </button>
+                </li>
+            )
         })}
     </ul>
 </li>
 <style>
     .selected {
         display: block;
+    }
+
+    .glass {
+        background: rgba( 255, 255, 255, 0.25 );
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
     }
 </style>

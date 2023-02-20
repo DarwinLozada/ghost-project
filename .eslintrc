@@ -57,6 +57,8 @@
     }
   ],
   "rules": {
-    "no-tabs": "off"
+    "no-tabs": "off",
+    "indent": "off",
+    "no-mixed-spaces-and-tabs": "off"
   }
 }

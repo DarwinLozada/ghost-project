@@ -40,6 +40,36 @@ const handleAlbumClickAnimations = (clickedAlbum: Element): void => {
     prevSelectedAlbum.classList.add(ALBUM_REMOVING)
   }
 
+  function handleChangeAlbum () {
+    if (prevSelectedAlbum) prevSelectedAlbum.classList.remove(ALBUM_SELECTED_CLASS, ALBUM_REMOVING)
+
+    const selectedAlbumInfo = document.querySelector(`#${clickedAlbum.id}.${ALBUM_ITEM_CLASS}`)
+
+    if (selectedAlbumInfo) {
+      const colorPalette = colorThief.getPalette(document.querySelector(`img#${clickedAlbum.id}`))
+      const blobs = document.querySelectorAll(`.${BLOB_CLASS}`)
+
+      blobs.forEach((blob, index) => {
+        anime({
+          targets: blob,
+          duration: 2500,
+          backgroundColor: `rgb(${colorPalette[index][0]}, ${colorPalette[index][1]}, ${colorPalette[index][2]})`,
+          opacity: 0.6
+        })
+      })
+
+      selectedAlbumInfo.classList.add(ALBUM_SELECTED_CLASS)
+
+      anime({
+        targets: selectedAlbumInfo,
+        delay: 500,
+        duration: 1500,
+        easing: 'easeInOutSine',
+        opacity: 1
+      })
+    }
+  }
+
   // First album selection.
   if (previousAlbumIndex === null) {
     anime({
@@ -64,17 +94,7 @@ const handleAlbumClickAnimations = (clickedAlbum: Element): void => {
         duration: 3000,
         easing: 'easeOutSine'
       },
-      begin: () => {
-        const selectedAlbumInfo = document.querySelector(`#${clickedAlbum.id}.${ALBUM_ITEM_CLASS}`)
-
-        if (selectedAlbumInfo) {
-          selectedAlbumInfo.classList.add(ALBUM_SELECTED_CLASS)
-          anime({
-            targets: selectedAlbumInfo,
-            opacity: 1
-          })
-        }
-      }
+      begin: handleChangeAlbum
     })
   } else {
     anime({
@@ -91,37 +111,7 @@ const handleAlbumClickAnimations = (clickedAlbum: Element): void => {
       duration: 1500,
       easing: 'easeInOutSine',
       opacity: 0,
-      complete: () => {
-        if (prevSelectedAlbum) prevSelectedAlbum.classList.remove(ALBUM_SELECTED_CLASS, ALBUM_REMOVING)
-
-        const selectedAlbumInfo = document.querySelector(`#${clickedAlbum.id}.${ALBUM_ITEM_CLASS}`)
-
-        if (selectedAlbumInfo) {
-          const colorPalette = colorThief.getPalette(document.querySelector(`img#${clickedAlbum.id}`))
-          const blobs = document.querySelectorAll(`.${BLOB_CLASS}`)
-
-          console.log(`img#${clickedAlbum.id}`)
-
-          blobs.forEach((blob, index) => {
-            anime({
-              targets: blob,
-              duration: 2500,
-              backgroundColor: `rgb(${colorPalette[index][0]}, ${colorPalette[index][1]}, ${colorPalette[index][2]})`,
-              opacity: 0.6
-            })
-          })
-
-          selectedAlbumInfo.classList.add(ALBUM_SELECTED_CLASS)
-
-          anime({
-            targets: selectedAlbumInfo,
-            delay: 500,
-            duration: 1500,
-            easing: 'easeInOutSine',
-            opacity: 1
-          })
-        }
-      }
+      complete: handleChangeAlbum
     })
   }
 
