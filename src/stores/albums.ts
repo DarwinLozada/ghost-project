@@ -2,7 +2,7 @@
 import { atom } from 'nanostores'
 import ColorThief from 'colorthief/dist/color-thief.mjs'
 import anime from 'animejs'
-import { GHOST_ALBUMS } from '../constants'
+import { AlbumsTranslateDiff, GHOST_ALBUMS } from '../constants'
 
 export const ALBUM_SELECTED_CLASS = 'selected'
 export const ALBUM_RELAXED_CLASS = 'relaxed'
@@ -85,7 +85,7 @@ const handleAlbumClickAnimations = (clickedAlbum: Element): void => {
         easing: 'easeOutSine'
       },
       translateY: {
-        value: '5%',
+        value: '10%',
         duration: 1000,
         easing: 'easeOutSine'
       },
@@ -121,6 +121,23 @@ const handleAlbumClickAnimations = (clickedAlbum: Element): void => {
       value: `${-72 * totalLoops * -1}deg`,
       duration: 1500,
       easing: 'easeOutSine'
+    }
+  })
+
+  const currentSelectedAlbumTranslateDiff = AlbumsTranslateDiff.find((item) => item.albumId === clickedAlbum.id)
+
+  anime({
+    targets: clickedAlbum,
+    duration: 1500,
+    easing: 'easeOutSine',
+    rotate: {
+      value: `${-72 * totalLoops * -1}deg`
+    },
+    scale: {
+      value: 1.5
+    },
+    translateY: {
+      value: `${currentSelectedAlbumTranslateDiff?.translate}`
     }
   })
 

@@ -3,8 +3,10 @@ interface Song {
   duration: string,
   videoId: string
 }
+
+type AlbumId = 'opus_eponymous' | 'infestissumam' | 'meliora' | 'prequelle' | 'impera'
 export interface Album {
-  id: string,
+  id: AlbumId,
   name: string,
   songs: Song[]
 }
@@ -105,4 +107,26 @@ export const GHOST_ALBUMS: Album[] = [{
     { name: 'Bite of Passage', duration: '0:31', videoId: 'rqNA-vXjvso' },
     { name: 'Respite on the Spitalfield', duration: '6:42', videoId: 'OY8kAOv_Z6U' }
   ]
+}]
+
+interface AlbumTranslateDiff {
+  albumId: AlbumId;
+  translate: string
+}
+
+export const AlbumsTranslateDiff: AlbumTranslateDiff[] = [{
+  albumId: 'opus_eponymous',
+  translate: '-30%'
+}, {
+  albumId: 'infestissumam',
+  translate: ''
+}, {
+  albumId: 'meliora',
+  translate: '30%'
+  }, {
+  albumId: 'prequelle',
+  translate: ''
+  }, {
+  albumId: 'impera',
+  translate: '30%'
 }]
